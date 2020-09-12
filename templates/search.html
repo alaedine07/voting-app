@@ -1,0 +1,111 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main_page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<!--<style>
+    .rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center
+}
+
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 20px;
+    font-size: 2vw;
+    color: #FFD600;
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: 14px
+    }
+
+    p {
+        font-size: 12px
+    }
+    .rating>label {
+    position: relative;
+    width: 20px;
+    font-size: 5vw;
+    color: #FFD600;
+    cursor: pointer
+}
+}
+</style>-->
+<div class="container">
+<body>
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <a class="navbar-brand" href="/register">Add a teacher</a>
+        <form class="form-inline" method="POST">
+          <input class="form-control mr-sm-2" name = "find" type="search" placeholder="Find a teacher" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+<!--flashing message-->
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success" role="alert">
+      <p>{{ message }}</p>
+    </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<!--outputing data fetched -->
+{% for row in details %}
+<tr>
+    <div class="card" style="width: 18rem; margin-top: 20px;">
+        <div class="card-body">
+          <h6 class="card-title"><td>first_name: {{ row[1] }}</td></h6>
+          <h6 class="card-title"><td>last_name: {{ row[2] }}</td></h6>
+          <h6 class="card-title"><td>subject: {{ row[3] }}</td></h6>
+          <h6 class="card-title"><td>institution: {{ row[4] }}</td></h6>
+          <h6 class="card-title"><td>score: {{ row[5] }}</td></h6>
+          <h6 class="card-title"><td>votes: {{ row[6] }}</td></h6>
+          <a href="#" class="card-link">visit profile</a><br>
+          <form method="POST" action="">
+          <div class="rating">
+              <input type="radio" name="rating" value="1" id="1">
+              <input type="radio" name="rating" value="2" id="2"> 
+              <input type="radio" name="rating" value="3" id="3">
+              <input type="radio" name="rating" value="4" id="4">
+              <input type="radio" name="rating" value="5" id="5">
+          </div>
+          <button class="btn btn-success" value="button2">Click to Rate</button>
+          </form>
+        </div>
+      </div>
+</tr> 
+{% endfor %}
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</div>
+</html>
